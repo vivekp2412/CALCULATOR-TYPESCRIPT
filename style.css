@@ -31,9 +31,13 @@ body{
 }
 .input-output{
     text-align:right;
-    font-size: 3em;
+    font-size: 2em;
     font-weight: bold;
-
+    max-width: 100%;
+    border: none;
+    outline: none;
+    padding: 10px;
+    background-color: #f1f1f1;
 }
 .deg,.fe{
     max-width: 60px !important;
