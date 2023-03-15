@@ -9,6 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/bb80167760.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="./style.css">
+    <script src="./index.js"></script>
 </head>
 <body>
     <section  class="container-main">
@@ -30,15 +31,43 @@
                 </div>
                 <div class="row trigo-function">
                     <div class="col trigonometry">
-                        <div class="button">
+                        <div class="button trigobutton">
                              <img class="symbol trigo"src="./Assets/icons8-trigonometry-18.png" alt="">
                              Trigonometry
                         </div>
+                        <div class="trigo-dropdown">
+                            <div class="trigo-dropdown-content">
+                                <div class="row dropdownrow">
+                                    <div class="col sin button op"><div>Sin</div></div>
+                                    <div class="col cos button op"><div>Cos</div></div>  
+                                    <div class="col tan button op"><div>Tan</div></div>
+                                </div>
+                                <div class="row dropdownrow">
+                                    <div class="col sininv button op"><div>Sin-1</div></div>
+                                    <div class="col cosinv button op"><div>Cos-1</div></div>  
+                                    <div class="col taninv button op"><div>Tan-1</div></div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="col functions">
-                        <div class="button">
+                        <div class="button functionbutton">
                             <img class="symbol function" src="./Assets/icons8-formula-fx-17.png" alt="">
                             Function<i class="fa-duotone fa-angle-down"></i>
+                        </div>
+                        <div class="func-dropdown">
+                            <div class="func-dropdown-content">
+                                <div class="row dropdownrow">
+                                    <div class="col abs button op"><div>|x|</div></div>
+                                    <div class="col floorx button op"><div>⌊x⌋</div></div>  
+                                    <div class="col ceilx button op"><div>⌈x⌉</div></div>
+                                </div>
+                                <div class="row dropdownrow">
+                                    <div class="col Random button op"><div>rand</div></div>
+                                    <div class="col degree button op"><div>degr</div></div>  
+                                    <div class="col dms button op"><div>dms</div></div>
+                                </div>
+                            </div>
                         </div>
                     </div>   
                 </div>
