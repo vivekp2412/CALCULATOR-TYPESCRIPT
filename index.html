@@ -19,8 +19,8 @@
             </div>
             <div class="container">
                 <div class="row deg-FE">
-                        <div class="col deg" id="#DEG"><div class="button"onclick="handleinput('deg')">DEG</div></div>
-                        <div class="col fe" id="#FE"><div class="button" onclick="handleinput('fe')">F-E</div></div>  
+                        <div class="col deg"  onclick="toggledeg()"><div class="button" id="#DEG">DEG</div></div>
+                        <div class="col fe"  onclick="handleinput('fe')"><div class="button" id="#FE">F-E</div></div>  
                 </div> 
                 <div class="row memory-function">
                     <div class="col MC" id=""><div class="button">MC</div></div>
@@ -73,7 +73,7 @@
                 </div>
                 <div class="operators-operands">
                     <div class="row">
-                        <div class="col 2nd button op"><div>2nd</div></div>
+                        <div class="col toggle button op" onclick="toggle()"><div>2nd</div></div>
                         <div class="col pie button op" onclick="handleinput('pie')"><div>π</div></div>  
                         <div class="col exponential button op" onclick="handleinput('e')"><div>e</div></div>
                         <div class="col clear button op" onclick="handleinput('clear')"><div>C</div></div> 
@@ -81,13 +81,15 @@
                     </div>
                     <div class="row">
                         <div class="col square button op" onclick="handleinput('square')"><div>x<sup>2</sup></div></div>
+                        <div class="col cube button op hide " onclick="handleinput('cube')"><div>x<sup>3</sup></div></div>
                         <div class="col 1/X button op" onclick="handleinput('1/x')"><div>1/x</div></div>  
                         <div class="col absolute button op" onclick="handleinput('abs')"><div>|x|</div></div>
                         <div class="col exp button op" onclick="handleinput('exp')"><div>exp</div></div> 
                         <div class="col mod button op" onclick="handleinput('%')"><div>mod</div></div> 
                     </div>
                     <div class="row">
-                        <div class="col root button op"><div>√</div></div>
+                        <div class="col root button op" onclick="handleinput('sqrt')"><div>√</div></div>
+                        <div class="col cuberoot button op hide" onclick="handleinput('cbrt')"><div>3√</div></div>
                         <div class="col l-round-brac button op" onclick="handleinput('lp')"><div>(</div></div>  
                         <div class="col r-round-brac button op" onclick="handleinput('rp')"><div>)</div></div>
                         <div class="col factorial button op" onclick="handleinput('!')"><div>n!</div></div> 
@@ -95,14 +97,16 @@
                     </div>
                     
                     <div class="row">
-                        <div class="col x-power-y button op"><div>X<sup>y</sup></div></div>
+                        <div class="col x-power-y button op" onclick="handleinput('x-power-y')"><div>X<sup>y</sup></div></div>
+                        <div class="col yrootx button op hide" onclick="handleinput('y-root-x')"><div>Y√X</div></div>
                         <div class="col seven button op" onclick="handleinput('7')"><div>7</div></div>  
                         <div class="col eight button op" onclick="handleinput('8')"><div>8</div></div>
                         <div class="col nine button op" onclick="handleinput('9')"><div>9</div></div> 
                         <div class="col multiply button op" onclick="handleinput('*')"><div><i class="fa-solid fa-xmark"></i></div></div> 
                     </div>
                     <div class="row">
-                        <div class="col 10-power-x button op"><div>10<sup>x</sup></div></div>
+                        <div class="col ten-power-x button op" onclick="handleinput('ten-power-x')"><div>10<sup>x</sup></div></div>
+                        <div class="col two-power-x button op hide" onclick="handleinput('two-power-x')"><div>2<sup>x</sup></div></div>
                         <div class="col four button op" onclick="handleinput('4')"><div>4</div></div>  
                         <div class="col five button op" onclick="handleinput('5')"><div>5</div></div>
                         <div class="col six button op" onclick="handleinput('6')"><div>6</div></div> 
@@ -110,13 +114,15 @@
                     </div>
                     <div class="row">
                         <div class="col log button op" onclick="handleinput('log')"><div>log</div></div>
+                        <div class="col xlogy button op hide" onclick="handleinput('xlogy')"><div>Xlogy</div></div>
                         <div class="col one button op" onclick="handleinput('1')"><div>1</div></div>  
                         <div class="col two button op" onclick="handleinput('2')"><div>2</div></div>
                         <div class="col three button op" onclick="handleinput('3')"><div>3</div></div> 
                         <div class="col deletelast button op" onclick="handleinput('+')"><div><i class="fa-solid fa-plus"></i></div></div> 
                     </div>
                     <div class="row">
-                        <div value="ln" class="col button ln op" onclick="handleinput('ln')"><div>ln</div></div>
+                        <div class="col button ln op" onclick="handleinput('ln')"><div>ln</div></div>
+                        <div class="col epowerx button op hide" onclick="handleinput('epowerx')"><div>e<sup>x</sup></div></div>
                         <div class="col plus-minus button op"><div>+/-</div></div>  
                         <div class="col zero button op" onclick="handleinput('0')"><div>0</div></div>
                         <div class="col dot button op" onclick="handleinput('.')"><div>.</div></div> 
