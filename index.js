@@ -147,7 +147,13 @@ function handleinput(input) {
         document.getElementById("#screen").value = displaytext;
         return;
     case "pie":
+        if (displaytext == " ") {
             displaytext+="3.14159"
+            document.getElementById("#screen").value = displaytext;
+            return
+          }
+            displaytext=displaytext+"*3.14159";
+            displaytext=eval(displaytext);
             document.getElementById("#screen").value = displaytext;
             return;
     case "!":
