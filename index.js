@@ -11,7 +11,6 @@ let cosec = /cosec(\d+)/;
 let rt = /√(\d+)/;
 let lg=/log(\d+)/
 
-
 //INDIVIDUAL FUNCTIONS FOR OPERATIONS
 function absolute(input) {
   console.log(input);
@@ -342,10 +341,10 @@ function handleinput(input) {
         }
         if(sec.test(op)){
           if(isdegree){
-            var ans= Math.sin((Number(op.slice(6))*Math.PI)/180).toFixed(3).toString();
+            var ans= Math.sin((Number(op.slice(4))*Math.PI)/180).toFixed(3).toString();
            
           }else{
-            var ans= Math.sin((Number(op.slice(6)))).toFixed(3).toString();
+            var ans= Math.sin((Number(op.slice(4)))).toFixed(3).toString();
             
           }
           displaytext=eval(1/ans);
@@ -357,10 +356,10 @@ function handleinput(input) {
         }
         if(cot.test(op)){
           if(isdegree){
-            var ans= Math.sin((Number(op.slice(6))*Math.PI)/180).toFixed(3).toString();
+            var ans= Math.sin((Number(op.slice(4))*Math.PI)/180).toFixed(3).toString();
 
           }else{
-            var ans= Math.sin((Number(op.slice(6)))).toFixed(3).toString();
+            var ans= Math.sin((Number(op.slice(4)))).toFixed(3).toString();
           }
           displaytext=eval(1/ans);
           if(isNaN(ans)){
