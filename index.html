@@ -18,6 +18,7 @@
                     <input type="text" value=" " id="#screen" class="input-output" maxlength="20"></input>
             </div>
             <div class="container">
+                <div id="errorscreen"></div>
                 <div class="row deg-FE">
                         <div class="col deg"  onclick="toggledeg()"><div class="button" id="#DEG">DEG</div></div>
                         <div class="col fe"  onclick="handleinput('fe')"><div class="button" id="#FE">F-E</div></div>  
@@ -33,11 +34,18 @@
                 </div>
                 <div class="row trigo-function">
                     <div class="col trigonometry">
-                        <div class="button trigobutton">
+                        <div class="button trigobutton" onclick="trigooptionsadd()">
                              <img class="symbol trigo"src="./Assets/icons8-trigonometry-18.png" alt="">
-                             Trigonometry
+                             <span class="trigo"> Trigonometry </span> <?xml version="1.0" encoding="iso-8859-1"?>
+                             <!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+                             <svg fill="#000000" height="15px" width="15px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+                                  viewBox="0 0 330 330" xml:space="preserve">
+                             <path id="XMLID_225_" d="M325.607,79.393c-5.857-5.857-15.355-5.858-21.213,0.001l-139.39,139.393L25.607,79.393
+                                 c-5.857-5.857-15.355-5.858-21.213,0.001c-5.858,5.858-5.858,15.355,0,21.213l150.004,150c2.813,2.813,6.628,4.393,10.606,4.393
+                                 s7.794-1.581,10.606-4.394l149.996-150C331.465,94.749,331.465,85.251,325.607,79.393z"/>
+                             </svg>
                         </div>
-                        <div class="trigo-dropdown">
+                        <div class="trigo-dropdown hide" id="trigodorp">
                             <div class="trigo-dropdown-content">
                                 <div class="row dropdownrow">
                                     <div class="col sin button op" onclick="handleinput('sin')" ><div>Sin</div></div>
@@ -45,29 +53,34 @@
                                     <div class="col tan button op" onclick="handleinput('tan')"><div>Tan</div></div>
                                 </div>
                                 <div class="row dropdownrow">
-                                    <div class="col sininv button op " onclick="handleinput('invsin')"><div>Sin-1</div></div>
-                                    <div class="col cosinv button op" onclick="handleinput('invcos')"><div>Cos-1</div></div>  
-                                    <div class="col taninv button op" onclick="handleinput('invtan')"><div>Tan-1</div></div>
+                                    <div class="col sininv button op " onclick="handleinput('cosec')"><div>cosec</div></div>
+                                    <div class="col cosinv button op" onclick="handleinput('sec')"><div>sec</div></div>  
+                                    <div class="col taninv button op" onclick="handleinput('cot')"><div>cot</div></div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col functions">
-                        <div class="button functionbutton">
+                        <div class="button functionbutton" onclick="functionoptionsadd()">
                             <img class="symbol function" src="./Assets/icons8-formula-fx-17.png" alt="">
-                            Function<i class="fa-duotone fa-angle-down"></i>
+                            Function <svg fill="#000000" height="15px" width="15px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+                            viewBox="0 0 330 330" xml:space="preserve">
+                       <path id="XMLID_225_" d="M325.607,79.393c-5.857-5.857-15.355-5.858-21.213,0.001l-139.39,139.393L25.607,79.393
+                           c-5.857-5.857-15.355-5.858-21.213,0.001c-5.858,5.858-5.858,15.355,0,21.213l150.004,150c2.813,2.813,6.628,4.393,10.606,4.393
+                           s7.794-1.581,10.606-4.394l149.996-150C331.465,94.749,331.465,85.251,325.607,79.393z"/>
+                       </svg>
                         </div>
-                        <div class="func-dropdown">
+                        <div class="func-dropdown hide">
                             <div class="func-dropdown-content">
                                 <div class="row dropdownrow">
                                     <div class="col abs button op" onclick="handleinput('abs')"><div>|x|</div></div>
                                     <div class="col floorx button op"onclick="handleinput('floor')"><div>⌊x⌋</div></div>  
-                                    <div class="col ceilx button op" onclick="handleinput('ceil')"><div>⌈x⌉</div></div>
+                                    
                                 </div>
                                 <div class="row dropdownrow">
+                                    
+                                    <div class="col ceilx button op" onclick="handleinput('ceil')"><div>⌈x⌉</div></div>
                                     <div class="col Random button op"onclick="handleinput('rand')"><div>rand</div></div>
-                                    <div class="col degree button op" onclick="handleinput('degr')"><div>degr</div></div>  
-                                    <div class="col dms button op" onclick="handleinput('dms')"><div>dms</div></div>
                                 </div>
                             </div>
                         </div>
@@ -116,7 +129,7 @@
                     </div>
                     <div class="row">
                         <div class="col log button op" onclick="handleinput('log')"><div>log</div></div>
-                        <div class="col xlogy button op hide" onclick="handleinput('xlogy')"><div>Xlogy</div></div>
+                        <div class="col xlogy button op hide" onclick="handleinput('ylogx')"><div>Xlogy</div></div>
                         <div class="col one button op" onclick="handleinput('1')"><div>1</div></div>  
                         <div class="col two button op" onclick="handleinput('2')"><div>2</div></div>
                         <div class="col three button op" onclick="handleinput('3')"><div>3</div></div> 
@@ -125,10 +138,10 @@
                     <div class="row">
                         <div class="col button ln op" onclick="handleinput('ln')"><div>ln</div></div>
                         <div class="col epowerx button op hide" onclick="handleinput('epowerx')"><div>e<sup>x</sup></div></div>
-                        <div class="col plus-minus button op"><div>+/-</div></div>  
+                        <div class="col plus-minus button op" onclick="toggleplus()"><div>+/-</div></div>  
                         <div class="col zero button op" onclick="handleinput('0')"><div>0</div></div>
                         <div class="col dot button op" onclick="handleinput('.')"><div>.</div></div> 
-                        <div class="col equal button op" onclick="handleinput('=')"><div><i class="fa-solid fa-equals"></i></div></div> 
+                        <div class="col button op equal" onclick="handleinput('=')"><div><i class="fa-solid fa-equals"></i></div></div> 
                     </div>
                 </div>
               </div>

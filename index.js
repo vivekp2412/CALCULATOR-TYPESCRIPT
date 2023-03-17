@@ -2,6 +2,16 @@ var displaytext = " ";
 var evalinputstring = " ";
 var isdegree = true;
 var memory=0;
+let tan = /tan(\d+)/;
+let sin = /sin(\d+)/;
+let cos = /cos(\d+)/;
+let cot = /cot(\d+)/;
+let sec = /sec(\d+)/;
+let cosec = /cosec(\d+)/;
+let rt = /√(\d+)/;
+// let trigodrop=false;
+let lg=/log(\d+)/
+
 function absolute(input) {
   console.log(input);
   let i = eval(input);
@@ -36,17 +46,6 @@ function factorial(input) {
   if (input == 1) return 1;
   return input * factorial(input - 1);
 }
-// function handleXPower(power) {
-//     if ((/[\d)IE]/.test(evalinputString.slice(-1)))) {
-//          let splitArr = evalinputString.split(/[+\-*\/]/);
-//                  let lastOprandDigit = splitArr.slice(-1)[0].length;
-//                  let cutBeforeInputString = evaluateInputString.slice(0, (lastOprandDigit * -1));
-//                  displayInput.value = cutBeforeInputString + "(" + splitArr.slice(-1)[0] + ")^" + power;
-//                   evalinputString = cutBeforeInputString + "Math.pow(" + splitArr.slice(-1)[0] + "," + power + ")";
-//                 }
-//     else {
-//         console.log("Invalid operation!!!");
-//     }}
 
 function handleinput(input) {
   var result;
@@ -65,9 +64,6 @@ function handleinput(input) {
       document.getElementById("#screen").value = displaytext;
       return;
     case "-":
-      if (displaytext == " ") {
-        return;
-      }
       evalinputstring = displaytext + "-";
       displaytext = displaytext + "-";
       document.getElementById("#screen").value = displaytext;
@@ -225,10 +221,8 @@ function handleinput(input) {
       if (displaytext == " ") {
         return;
       }
-      screentext=displaytext+"√";
-      let x = displaytext.split(/[√]/);
-      displaytext = "Math.pow("+x[0]+","+"1/";
-      document.getElementById("#screen").value = screentext;
+      displaytext=displaytext+"√";
+      document.getElementById("#screen").value = displaytext;
       return;
       
     case "two-power-x":
@@ -268,15 +262,130 @@ function handleinput(input) {
   
           return;
         }
-    
-
-        
+    case "ylogx":
+      if (displaytext == " ") {
+        return;
+      }
+      displaytext=displaytext+"log";
+      document.getElementById("#screen").value = displaytext;
+      return;
+      
+    case "fe":
+      if (displaytext == " ") {
+        return;
+      }
+      displaytext=Number(displaytext).toExponential(2);
+      document.getElementById("#screen").value = displaytext;
+      return
     case "=":
       let op = document.getElementById("#screen").value;
+      console.log(op)
       try {
+        // console.log(op)
+        if(tan.test(op)){
+          // console.log(op.slice(4));
+          if(isdegree){
+            displaytext= Math.tan((Number(op.slice(4))*Math.PI)/180).toFixed(3);
+            if(isNaN(displaytext)){
+              displaytext="Error"
+            }
+          }else{
+            displaytext= Math.tan(Number(op.slice(4))).toFixed(3).toString();
+            if(isNaN(displaytext)){
+              displaytext="Error"
+            }
+          }
+          if (displaytext.length > 6) { displaytext="not defined"; return; }
+         return
+        }
+
+        //sin
+        if(sin.test(op)){
+          if(isdegree){
+            displaytext= Math.sin((Number(op.slice(4))*Math.PI)/180).toFixed(3).toString();
+            if(isNaN(displaytext)){
+              displaytext="Error"
+            }
+          }else{
+            displaytext= Math.sin((Number(op.slice(4)))).toFixed(3).toString();
+            if(isNaN(displaytext)){
+              displaytext="Error"
+            }
+          }
+         return
+        }
+        if(cos.test(op)){
+          if(isdegree){
+            displaytext= Math.cos((Number(op.slice(4))*Math.PI)/180).toFixed(3).toString();
+            if(isNaN(displaytext)){
+              displaytext="Error"
+            }
+          }else{
+            displaytext= Math.cos((Number(op.slice(4)))).toFixed(3).toString();
+            if(isNaN(displaytext)){
+              displaytext="Error"
+            }
+          }
+         return
+        }
+        if(cosec.test(op)){
+          if(isdegree){
+            var ans= Math.sin((Number(op.slice(6))*Math.PI)/180).toFixed(3).toString();
+           
+          }else{
+            var ans= Math.sin((Number(op.slice(6)))).toFixed(3).toString();
+            
+          }
+           
+          displaytext=eval(1/ans);
+          if(isNaN(displaytext)){
+            displaytext="Error"
+         }
+         return
+        }
+        if(sec.test(op)){
+          if(isdegree){
+            var ans= Math.sin((Number(op.slice(6))*Math.PI)/180).toFixed(3).toString();
+           
+          }else{
+            var ans= Math.sin((Number(op.slice(6)))).toFixed(3).toString();
+            
+          }
+          displaytext=eval(1/ans);
+          // console.log(displaytext);
+          if(isNaN(displaytext)){
+            displaytext="Error"
+          }
+         return
+        }
+        if(cot.test(op)){
+          if(isdegree){
+            var ans= Math.sin((Number(op.slice(6))*Math.PI)/180).toFixed(3).toString();
+
+          }else{
+            var ans= Math.sin((Number(op.slice(6)))).toFixed(3).toString();
+          }
+          displaytext=eval(1/ans);
+          if(isNaN(ans)){
+            displaytext="Error"
+          }
+         return
+        }
+
+        if(rt.test(op)){
+          let element =  op.split("√");
+          op = "Math.pow("+element[0]+","+"1/"+element[1]+")";
+        }
+        if(lg.test(op)){
+          let element =  op.split("log");
+          logvalue= Math.log(element[1]);
+
+          op = element[0]+"*"+logvalue;
+        }
+        
+
         result = eval(op);
-        console.log(result);
-        if(result==NaN){
+        if(isNaN(result)){
           displaytext="error";
         }else{     displaytext = result;}
    
@@ -289,6 +398,8 @@ function handleinput(input) {
         document.getElementById("#screen").value = displaytext;
         return;
       }
+   
+
 
 
       // memory functions
@@ -339,20 +450,74 @@ function handleinput(input) {
             //function
     case "floor":
               //  displaytext=document.getElementById("#screen").innerText;
-               
-               let r = flor(displaytext);
-               document.getElementById("#screen").innerText=r;
+               var y = eval(displaytext);
+               var r = Math.floor(eval(y));
+               document.getElementById("#screen").value=r;
                return;
-          
+    case "ceil":
+                //  displaytext=document.getElementById("#screen").innerText;
+                 var y = eval(displaytext);
+                 var r = Math.ceil(eval(y));
+                 document.getElementById("#screen").value=r;
+                 return;
+    case "rand":
+                displaytext = Math.random().toFixed(3);
+                document.getElementById("#screen").value=displaytext;
+                return
+    case "degr":
+                if(!isdegree){
+                  displaytext=displaytext*(180/Math.PI);
+                  document.getElementById("#screen").value=displaytext;
+                }else{
+                  displaytext="already in degree";
+                  document.getElementById("#screen").value=displaytext;
+                }
+                return
         
         
-      
+    
 
     default:
       displaytext += input;
       evalinputstring = displaytext;
       document.getElementById("#screen").value = displaytext;
   }
+}
+
+function toggleplus(){
+  let str = document.getElementById("#screen").value;
+  if(str.includes("-")){
+    isplus=false;
+  }else{
+    isplus=true;
+  }
+  if(!isplus){
+    isplus=true; 
+    let z=document.getElementById("#screen").value;
+   
+    let r = eval(z);
+    r=r.toString();
+    console.log(r);
+    if(r.includes("-")){
+      displaytext=Math.abs(r);
+    }
+  }else{
+    isplus=false; 
+    let z=document.getElementById("#screen").value;
+    let r = eval(z);
+    r=r.toString();
+    if(!r.includes("-")){
+      displaytext="-"+displaytext;
+    }
+
+  }
+
+  
+  
+    
+    document.getElementById("#screen").value=displaytext;
+    return;
+  
 }
 function toggle() {
   let toggle = document.querySelector(".toggle");
@@ -417,9 +582,39 @@ function toggledeg() {
   if (isdegree) {
     degree.innerText = "RAD";
     isdegree = false;
+    console.log(isdegree);
   } else {
     degree.innerText = "DEG";
     isdegree = true;
+    console.log(isdegree);
+  }
+}
+function trigooptionsadd(){
+  let trigodrop=document.querySelector(".trigo-dropdown").classList.contains("hide")
+  if(trigodrop){
+    // trigodrop=false;
+    console.log(trigodrop);
+    document.querySelector(".trigo-dropdown").classList.remove("hide")
+
+  }else{
+    // trigodrop=true;
+    console.log(trigodrop);
+    document.querySelector(".trigo-dropdown").classList.add("hide");
+
+
+    
+  }
+}
+function functionoptionsadd(){
+  let funcdrop=document.querySelector(".func-dropdown").classList.contains("hide")
+  if(funcdrop){
+    document.querySelector(".func-dropdown").classList.remove("hide")
+
+  }else{
+    document.querySelector(".func-dropdown").classList.add("hide");
+
+
+    
   }
 }
 // console.log(string);

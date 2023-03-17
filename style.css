@@ -79,6 +79,9 @@ body{
     padding: 0;
     
 }
+.trigo{
+    margin: 0px 5px;
+}
 .trigonometry{
     position: relative;
 }
@@ -96,13 +99,13 @@ body{
     width: 15rem;
 }
 
-.trigonometry:hover .trigo-dropdown-content{
+/* .trigonometry:hover .trigo-dropdown-content{
     display: block;
-}
+} */
 .trigo-dropdown-content{
     max-width: 17rem;
     width: 100%;
-    display: none;
+    /* display: none; */
 }
 .dropdownrow{
     padding: 0;
@@ -111,7 +114,7 @@ body{
 .func-dropdown{
     position: absolute;
     z-index: 99999;
-    width: 15rem;
+    width: 13rem;
     background-color: white;
 }
 .functions:hover .func-dropdown-content{
@@ -120,19 +123,19 @@ body{
 .func-dropdown-content{
     max-width: 17rem;
     width: 100%;
-    display: none;
 }
 .symbol{
     margin: 0 6px;
 }
 .operators-operands .col:hover{
  background-color: #c6c7c8;
- /* color: white; */
-
 }
 .op{
     margin: 3px;
     min-width: 17%;
 } 
+.equal{
+    background-color: lightskyblue;
+}
 
 
