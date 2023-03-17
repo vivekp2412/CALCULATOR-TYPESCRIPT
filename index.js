@@ -9,12 +9,16 @@ let cot = /cot(\d+)/;
 let sec = /sec(\d+)/;
 let cosec = /cosec(\d+)/;
 let rt = /√(\d+)/;
-// let trigodrop=false;
 let lg=/log(\d+)/
 
+
+//INDIVIDUAL FUNCTIONS FOR OPERATIONS
 function absolute(input) {
   console.log(input);
   let i = eval(input);
+  if(isNaN(i)){
+    return "Error"
+  }
   return Math.abs(i);
 }
 function square(input) {
@@ -47,27 +51,32 @@ function factorial(input) {
   return input * factorial(input - 1);
 }
 
+
+//MAIN CALCULATOR FUCTION
 function handleinput(input) {
   var result;
   switch (input) {
+    //BASIC OPERATIONS
     case "clear":
       displaytext = " ";
       document.getElementById("#screen").value = " ";
       return;
+    // Addition
     case "+":
       if (displaytext == " ") {
         return;
       }
       evalinputstring = displaytext + "+";
       displaytext = displaytext + "+";
-
       document.getElementById("#screen").value = displaytext;
       return;
+    // Substraction
     case "-":
       evalinputstring = displaytext + "-";
       displaytext = displaytext + "-";
       document.getElementById("#screen").value = displaytext;
       return;
+    //Multiplication
     case "*":
       if (displaytext == " ") {
         return;
@@ -76,6 +85,7 @@ function handleinput(input) {
       displaytext = displaytext + "*";
       document.getElementById("#screen").value = displaytext;
       return;
+    //DIVISION
     case "/":
       if (displaytext == " ") {
         return;
@@ -84,6 +94,7 @@ function handleinput(input) {
       displaytext = displaytext + "/";
       document.getElementById("#screen").value = displaytext;
       return;
+    //MODULUS
     case "%":
       if (displaytext == " ") {
         return;
@@ -92,93 +103,91 @@ function handleinput(input) {
       displaytext = displaytext + "%";
       document.getElementById("#screen").value = displaytext;
       return;
-
+    //LEFT-PARANTHESIS
     case "lp":
       evalinputstring = displaytext + "(";
       displaytext = displaytext + "(";
       document.getElementById("#screen").value = displaytext;
       return;
+    //RIGHT PARENTHESIS
     case "rp":
       evalinputstring = displaytext + ")";
       displaytext = displaytext + ")";
       document.getElementById("#screen").value = displaytext;
       return;
+    //ABSOLUTE VALUE
     case "abs":
       displaytext = absolute(displaytext);
       document.getElementById("#screen").value = displaytext;
       return;
+    //SQUARE FUNCTION
     case "square":
-      // evalinputstring=displaytext;
-      // handleXPower(2);
-      // displaytext=eval(displaytext);
       displaytext = displaytext + "**2";
       document.getElementById("#screen").value = displaytext;
       return;
+    //CUBE
     case "cube":
       displaytext = displaytext + "**3";
       document.getElementById("#screen").value = displaytext;
       return;
+    // ONE BY X FUNCTION
     case "1/x":
       let data = displaytext.split(/[+\-*\/]/);
       let lastelement = data[data.length - 1];
       displaytext = displaytext.slice(0, -lastelement.length);
-
       displaytext = displaytext + "1/" + lastelement;
-      console.log(displaytext);
       document.getElementById("#screen").value = displaytext;
       return;
+    //EXPONENTIAL FUNCTION
     case "exp":
       displaytext = exp(displaytext);
       document.getElementById("#screen").value = displaytext;
       return;
+    //SQUARE ROOT FUNCTION
     case "sqrt":
-    //      let data3 = displaytext.split(/[+\-*\/]/);
-    //     let lastelement3 = data3[data3.length - 1];
-    //   displaytext = displaytext.slice(0, -lastelement3.length);
-
       displaytext = root(displaytext);
-    // displaytext=displaytext + "Math.pow(" + lastelement3+")"
-    // displaytext=eval(displaytext);
       document.getElementById("#screen").value = displaytext;
       return;
-
+    //DELETE LAST ELEMENT ON DISPLAY
     case "x":
       displaytext = displaytext.toString();
       displaytext = displaytext.slice(0, -1);
       document.getElementById("#screen").value = displaytext;
       return;
+    // E FUNCTION
     case "e":
         displaytext+="2.718281"
         document.getElementById("#screen").value = displaytext;
         return;
+    // PIE BUTTON HANDLER
     case "pie":
         if (displaytext == " ") {
             displaytext+="3.14159"
             document.getElementById("#screen").value = displaytext;
             return
           }
-            displaytext=displaytext+"*3.14159";
-            displaytext=eval(displaytext);
-            document.getElementById("#screen").value = displaytext;
-            return;
+        displaytext=displaytext+"*3.14159";
+        displaytext=eval(displaytext);
+        document.getElementById("#screen").value = displaytext;
+        return;
+    //FACTORIAL HANDLER
     case "!":
-      data1 = displaytext.split(/[+\-*\/]/);
-      lastelement1 = data1[data1.length - 1];
-      factans = factorial(lastelement1);
-      displaytext = displaytext.slice(0, -lastelement1.length);
-      displaytext = displaytext + factans;
-      document.getElementById("#screen").value = displaytext;
-      return;
+          data1 = displaytext.split(/[+\-*\/]/);
+          lastelement1 = data1[data1.length - 1];
+          factans = factorial(lastelement1);
+          displaytext = displaytext.slice(0, -lastelement1.length);
+          displaytext = displaytext + factans;
+          document.getElementById("#screen").value = displaytext;
+          return;
+    // X POWER Y FUNCTION
     case "x-power-y":
       if (displaytext == " ") {
         return;
       }
-
       displaytext = displaytext + "**";
-
       document.getElementById("#screen").value = displaytext;
-
       return;
+    //TEN-POWER-X
     case "ten-power-x":
       if (displaytext == " ") {
         displaytext = 1;
@@ -186,12 +195,10 @@ function handleinput(input) {
         return;
       } else {
         displaytext = eval("10**" + displaytext);
-
         document.getElementById("#screen").value = displaytext;
-
         return;
       }
-    //    displaytext=displaytext+"**";
+    //LOG FUNCTION
     case "log":
       if (displaytext == " ") {
         return;
@@ -200,6 +207,7 @@ function handleinput(input) {
       displaytext = eval(Math.log10(displaytext));
       document.getElementById("#screen").value = displaytext;
       return;
+    //LN FUNCTION
     case "ln":
       if (displaytext == " ") {
         return;
@@ -208,8 +216,7 @@ function handleinput(input) {
       displaytext = eval(Math.log(displaytext));
       document.getElementById("#screen").value = displaytext;
       return;
-
-
+    // CUBE ROOT X
     case "cbrt":
       if (displaytext == " ") {
         return;
@@ -217,6 +224,7 @@ function handleinput(input) {
       displaytext = cbroot(displaytext);
       document.getElementById("#screen").value = displaytext;
       return;
+    // Y ROOT X FUNCTION
     case "y-root-x":
       if (displaytext == " ") {
         return;
@@ -224,7 +232,7 @@ function handleinput(input) {
       displaytext=displaytext+"√";
       document.getElementById("#screen").value = displaytext;
       return;
-      
+    //TWO POWER X FUNCTION
     case "two-power-x":
         if (displaytext == " ") {
             displaytext= "2**"+displaytext;
@@ -238,6 +246,7 @@ function handleinput(input) {
         displaytext=eval(displaytext);
         document.getElementById("#screen").value = displaytext;
         return;
+    // E POWER X FUNCTION
     case "epowerx":
       if (displaytext == " ") {
         displaytext = 1;
@@ -245,23 +254,10 @@ function handleinput(input) {
         return;
       } else {
         displaytext = eval("2.71828**" + displaytext);
-
         document.getElementById("#screen").value = displaytext;
-
         return;
       }
-    case "epowerx":
-        if (displaytext == " ") {
-          displaytext = 1;
-          document.getElementById("#screen").value = displaytext;
-          return;
-        } else {
-          displaytext = eval("2.71828**" + displaytext);
-  
-          document.getElementById("#screen").value = displaytext;
-  
-          return;
-        }
+    // Y LOG X FUNCTION
     case "ylogx":
       if (displaytext == " ") {
         return;
@@ -269,7 +265,7 @@ function handleinput(input) {
       displaytext=displaytext+"log";
       document.getElementById("#screen").value = displaytext;
       return;
-      
+    // FE HANDLER  
     case "fe":
       if (displaytext == " ") {
         return;
@@ -277,6 +273,7 @@ function handleinput(input) {
       displaytext=Number(displaytext).toExponential(2);
       document.getElementById("#screen").value = displaytext;
       return
+    // EQUAL BUTTON HANDLER
     case "=":
       let op = document.getElementById("#screen").value;
       console.log(op)
@@ -402,7 +399,7 @@ function handleinput(input) {
 
 
 
-      // memory functions
+      // MEMORY FUNCTIONS
     case "ms":
       memory=displaytext;
       document.getElementById("memory").innerText=memory;
@@ -411,79 +408,62 @@ function handleinput(input) {
 
       return
     case "mc":
-        memory=0;
-        document.getElementById("memory").innerText=memory;
-        // displaytext=" ";
-        // document.getElementById("#screen").value = displaytext;
-  
-        return
+           memory=0;
+           document.getElementById("memory").innerText=memory;
+           return
     case "mr":
           displaytext=document.getElementById("memory").innerText;
-          // document.getElementById("memory").innerText=memory;
-          // displaytext=" ";
           document.getElementById("#screen").value = displaytext;
-    
           return
     case "mr":
-            displaytext=document.getElementById("memory").innerText;
-            // document.getElementById("memory").innerText=memory;
-            // displaytext=" ";
-            document.getElementById("#screen").value = displaytext;
-      
-            return
+          displaytext=document.getElementById("memory").innerText;
+          document.getElementById("#screen").value = displaytext;
+          return
     case "m+":
-             displaytext=displaytext+"+"+document.getElementById("memory").innerText;
-             var result=eval(displaytext);
-             memory=result;
-             document.getElementById("memory").innerText=memory;
-             document.getElementById("#screen").value=result;
-        
-              return
+            displaytext=displaytext+"+"+document.getElementById("memory").innerText;
+            var result=eval(displaytext);
+            memory=result;
+            document.getElementById("memory").innerText=memory;
+            document.getElementById("#screen").value=result;
+            return
     case "m-":
-                displaytext=displaytext+"-"+document.getElementById("memory").innerText;
-                var result=eval(displaytext);
-                memory=result;
-                document.getElementById("memory").innerText=memory;
-                document.getElementById("#screen").value=result
-           
-                 return
-            //function
+            displaytext=displaytext+"-"+document.getElementById("memory").innerText;
+            var result=eval(displaytext);
+            memory=result;
+            document.getElementById("memory").innerText=memory;
+            document.getElementById("#screen").value=result
+            return
+    // FUNTIONS HANDLER (FLOOR, RANDOM,CEIL,ABS)
     case "floor":
-              //  displaytext=document.getElementById("#screen").innerText;
                var y = eval(displaytext);
-               var r = Math.floor(eval(y));
+               if(isNaN(y)){
+                  r="Error";
+               }else{
+                var r = Math.floor(eval(y));
+               }
                document.getElementById("#screen").value=r;
                return;
     case "ceil":
-                //  displaytext=document.getElementById("#screen").innerText;
-                 var y = eval(displaytext);
-                 var r = Math.ceil(eval(y));
-                 document.getElementById("#screen").value=r;
-                 return;
+               var y = eval(displaytext);
+               if(isNaN(y)){
+                   r="Error";
+               }else{
+                   var r = Math.ceil(eval(y));
+               }
+               document.getElementById("#screen").value=r;
+               return;
     case "rand":
                 displaytext = Math.random().toFixed(3);
                 document.getElementById("#screen").value=displaytext;
                 return
-    case "degr":
-                if(!isdegree){
-                  displaytext=displaytext*(180/Math.PI);
-                  document.getElementById("#screen").value=displaytext;
-                }else{
-                  displaytext="already in degree";
-                  document.getElementById("#screen").value=displaytext;
-                }
-                return
-        
-        
-    
-
+    // ANY OTHER KEY PRESS HANDLER
     default:
       displaytext += input;
       evalinputstring = displaytext;
       document.getElementById("#screen").value = displaytext;
   }
 }
-
+//FUNCTION FOR HANDLER PLUS/MINUS TOGGLER
 function toggleplus(){
   let str = document.getElementById("#screen").value;
   if(str.includes("-")){
@@ -494,7 +474,6 @@ function toggleplus(){
   if(!isplus){
     isplus=true; 
     let z=document.getElementById("#screen").value;
-   
     let r = eval(z);
     r=r.toString();
     console.log(r);
@@ -511,14 +490,12 @@ function toggleplus(){
     }
 
   }
-
-  
-  
-    
-    document.getElementById("#screen").value=displaytext;
-    return;
-  
+  document.getElementById("#screen").value=displaytext;
+  return; 
 }
+
+
+//FUNCTION FOR THE 2ND BUTTON TOGGLER
 function toggle() {
   let toggle = document.querySelector(".toggle");
   isToogle = true;
@@ -577,6 +554,7 @@ function toggle() {
     epowerx.classList.remove("hide");
   }
 }
+//FUNCTION FOR DEGREE TO RADIAN AND RADIAN TO DEGREE TOGGLER
 function toggledeg() {
   let degree = document.getElementById("#DEG");
   if (isdegree) {
@@ -589,32 +567,28 @@ function toggledeg() {
     console.log(isdegree);
   }
 }
+// DROP DOWN FOR TRIGONOMETRY MENU
 function trigooptionsadd(){
   let trigodrop=document.querySelector(".trigo-dropdown").classList.contains("hide")
   if(trigodrop){
-    // trigodrop=false;
     console.log(trigodrop);
     document.querySelector(".trigo-dropdown").classList.remove("hide")
+    document.querySelector(".func-dropdown").classList.add("hide");
 
   }else{
-    // trigodrop=true;
     console.log(trigodrop);
-    document.querySelector(".trigo-dropdown").classList.add("hide");
-
-
-    
+    document.querySelector(".trigo-dropdown").classList.add("hide");   
   }
 }
+// FUNCTION FOR FUNCTION DROPDOWN MENU
 function functionoptionsadd(){
   let funcdrop=document.querySelector(".func-dropdown").classList.contains("hide")
   if(funcdrop){
-    document.querySelector(".func-dropdown").classList.remove("hide")
+    document.querySelector(".func-dropdown").classList.remove("hide");
+    document.querySelector(".trigo-dropdown").classList.add("hide");
 
   }else{
-    document.querySelector(".func-dropdown").classList.add("hide");
-
-
-    
+    document.querySelector(".func-dropdown").classList.add("hide");   
   }
 }
-// console.log(string);
+
