@@ -22,12 +22,14 @@
                         <div class="col deg"  onclick="toggledeg()"><div class="button" id="#DEG">DEG</div></div>
                         <div class="col fe"  onclick="handleinput('fe')"><div class="button" id="#FE">F-E</div></div>  
                 </div> 
+                <div class="memory">Memory:<span id="memory">0</span></div>
                 <div class="row memory-function">
-                    <div class="col MC" id=""><div class="button">MC</div></div>
-                    <div class="col MR"><div class="button">MR</div></div>  
-                    <div class="col M+"><div class="button">M+</div></div>
-                    <div class="col M-"><div class="button">M-</div></div> 
-                    <div class="col MS"><div class="button">MS</div></div> 
+                   
+                    <div class="col MC" onclick="handleinput('mc')"><div class="button">MC</div></div>
+                    <div class="col MR" onclick="handleinput('mr')"><div class="button">MR</div></div>  
+                    <div class="col M+" onclick="handleinput('m+')"><div class="button">M+</div></div>
+                    <div class="col M-" onclick="handleinput('m-')" ><div class="button">M-</div></div> 
+                    <div class="col MS" onclick="handleinput('ms')"><div class="button">MS</div></div> 
                 </div>
                 <div class="row trigo-function">
                     <div class="col trigonometry">

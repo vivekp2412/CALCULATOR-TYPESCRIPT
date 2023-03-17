@@ -1,6 +1,7 @@
 var displaytext = " ";
 var evalinputstring = " ";
 var isdegree = true;
+var memory=0;
 function absolute(input) {
   console.log(input);
   let i = eval(input);
@@ -15,6 +16,11 @@ function onebyx(input) {
 function exp(input) {
   return Math.exp(input);
 }
+function flor(input) {
+  console.log(input);
+  console.log(Math.floor(input));
+  return Math.floor(input);
+}
 function root(input) {
   i = eval(input);
   return Math.sqrt(i);
@@ -22,6 +28,9 @@ function root(input) {
 function cbroot(input) {
     i = eval(input);
     return Math.cbrt(i);
+  }
+  function xrooty(a,b){
+    return Math.pow(a,1/b);
   }
 function factorial(input) {
   if (input == 1) return 1;
@@ -212,6 +221,16 @@ function handleinput(input) {
       displaytext = cbroot(displaytext);
       document.getElementById("#screen").value = displaytext;
       return;
+    case "y-root-x":
+      if (displaytext == " ") {
+        return;
+      }
+      screentext=displaytext+"√";
+      let x = displaytext.split(/[√]/);
+      displaytext = "Math.pow("+x[0]+","+"1/";
+      document.getElementById("#screen").value = screentext;
+      return;
+      
     case "two-power-x":
         if (displaytext == " ") {
             displaytext= "2**"+displaytext;
@@ -225,14 +244,42 @@ function handleinput(input) {
         displaytext=eval(displaytext);
         document.getElementById("#screen").value = displaytext;
         return;
+    case "epowerx":
+      if (displaytext == " ") {
+        displaytext = 1;
+        document.getElementById("#screen").value = displaytext;
+        return;
+      } else {
+        displaytext = eval("2.71828**" + displaytext);
+
+        document.getElementById("#screen").value = displaytext;
+
+        return;
+      }
+    case "epowerx":
+        if (displaytext == " ") {
+          displaytext = 1;
+          document.getElementById("#screen").value = displaytext;
+          return;
+        } else {
+          displaytext = eval("2.71828**" + displaytext);
+  
+          document.getElementById("#screen").value = displaytext;
+  
+          return;
+        }
     
+
         
     case "=":
       let op = document.getElementById("#screen").value;
       try {
         result = eval(op);
         console.log(result);
-        displaytext = result.toFixed(4);
+        if(result==NaN){
+          displaytext="error";
+        }else{     displaytext = result;}
+   
       } catch (e) {
         if (e instanceof SyntaxError) {
           displaytext = "Not valid operation";
@@ -242,6 +289,65 @@ function handleinput(input) {
         document.getElementById("#screen").value = displaytext;
         return;
       }
+
+
+      // memory functions
+    case "ms":
+      memory=displaytext;
+      document.getElementById("memory").innerText=memory;
+      displaytext=" ";
+      document.getElementById("#screen").value = displaytext;
+
+      return
+    case "mc":
+        memory=0;
+        document.getElementById("memory").innerText=memory;
+        // displaytext=" ";
+        // document.getElementById("#screen").value = displaytext;
+  
+        return
+    case "mr":
+          displaytext=document.getElementById("memory").innerText;
+          // document.getElementById("memory").innerText=memory;
+          // displaytext=" ";
+          document.getElementById("#screen").value = displaytext;
+    
+          return
+    case "mr":
+            displaytext=document.getElementById("memory").innerText;
+            // document.getElementById("memory").innerText=memory;
+            // displaytext=" ";
+            document.getElementById("#screen").value = displaytext;
+      
+            return
+    case "m+":
+             displaytext=displaytext+"+"+document.getElementById("memory").innerText;
+             var result=eval(displaytext);
+             memory=result;
+             document.getElementById("memory").innerText=memory;
+             document.getElementById("#screen").value=result;
+        
+              return
+    case "m-":
+                displaytext=displaytext+"-"+document.getElementById("memory").innerText;
+                var result=eval(displaytext);
+                memory=result;
+                document.getElementById("memory").innerText=memory;
+                document.getElementById("#screen").value=result
+           
+                 return
+            //function
+    case "floor":
+              //  displaytext=document.getElementById("#screen").innerText;
+               
+               let r = flor(displaytext);
+               document.getElementById("#screen").innerText=r;
+               return;
+          
+        
+        
+      
+
     default:
       displaytext += input;
       evalinputstring = displaytext;
