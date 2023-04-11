@@ -1,7 +1,7 @@
 let displaytext:string= " ";
 let evalinputstring:string = " ";
 let isdegree:boolean = true;
-var memory:string="0";
+let memory:string="";
 let tan = /tan(\d+)/;
 let sin = /sin(\d+)/;
 let cos = /cos(\d+)/;
@@ -13,19 +13,13 @@ let lg=/log(\d+)/
 
 //INDIVIDUAL FUNCTIONS FOR OPERATIONS
 function absolute(input:string):number {
-  console.log(input);
   let i = eval(input);
-  // if(isNaN(i)){
-  //   return "Error"
-  // }
+ 
   return Math.abs(i);
 }
 function square(input:string):number {
   return eval(input);
 }
-// function onebyx(input:string) {
-//   return eval(1/input);
-// }
 function exp(input:string):number {
   return Math.exp(Number(input));
 }
@@ -44,8 +38,15 @@ function cbroot(input:string):number {
     return Math.pow(a,1/b);
   }
 function factorial(input:number):number {
-  if (input == 1) return 1;
-  return input * factorial(input - 1);
+  try {
+    if (input === 0) {
+        return 1;
+    }
+    return input * factorial(input - 1)!;
+  }
+  catch {
+    return Infinity;
+  }
 }
 
 
@@ -205,6 +206,7 @@ function handleinput(input:string) {
       let data1:string[];
       let lastelement1:string;
       let factans:number;
+         displaytext=(document.getElementById("#screen") as HTMLInputElement).value;
           data1 = displaytext.split(/[+\-*\/]/);
           lastelement1 = data1[data1.length - 1]!;
           factans = factorial(Number(lastelement1));
@@ -233,17 +235,11 @@ function handleinput(input:string) {
       }
     //LOG FUNCTION
     case "log":
-      // if (displaytext == " ") {
-      //   return;
-      // }
       displaytext+="log10(";
       (document.getElementById("#screen") as HTMLInputElement).value = displaytext;
       return;
     //LN FUNCTION
     case "ln":
-      if (displaytext == " ") {
-        return;
-      }
       displaytext+="log(";
       (document.getElementById("#screen") as HTMLInputElement).value = displaytext;
       return;
@@ -289,11 +285,8 @@ function handleinput(input:string) {
         return;
       }
     // Y LOG X FUNCTION
-    case "ylogx":
-      if (displaytext == " ") {
-        return;
-      }
-      displaytext=displaytext+"log";
+    case "log2":
+      displaytext=displaytext+"log2(";
       (document.getElementById("#screen") as HTMLInputElement).value = displaytext;
       return;
     // FE HANDLER  
@@ -306,168 +299,79 @@ function handleinput(input:string) {
       return
     // EQUAL BUTTON HANDLER
     case "=":
-      let op =  (document.getElementById("#screen") as HTMLInputElement).value;
-      console.log(op);
-      console.log(eval(convertString(op)));
-      
-      (document.getElementById("#screen") as HTMLInputElement).value=convertString(op);
-     
-      try {
-        // console.log(op)
-        if(tan.test(op)){
-          // console.log(op.slice(4));
-          if(isdegree){
-            displaytext= Math.tan((Number(op.slice(4))*Math.PI)/180).toFixed(3);
-            if(isNaN(Number(displaytext))){
-              displaytext="Error";
-            }
-          }else{
-            displaytext= Math.tan(Number(op.slice(4))).toFixed(3).toString();
-            if(isNaN(Number(displaytext))){
-              displaytext="Error"
-            }
-          }
-          if (displaytext.length > 6) { displaytext="not defined"; return; }
-         return
+      let finalResult:number|string;
+      try{
+        let op =  (document.getElementById("#screen") as HTMLInputElement).value;
+        finalResult=eval(convertString(op));
+        if(isNaN(Number(finalResult))){
+          showErrorMessage("error")
+        }else
+        {     
+          displaytext = finalResult.toString();
         }
-
-        //sin
-        if(sin.test(op)){
-          if(isdegree){
-            displaytext= Math.sin((Number(op.slice(4))*Math.PI)/180).toFixed(3).toString();
-            if(isNaN(Number(displaytext))){
-              displaytext="Error"
-            }
-          }else{
-            displaytext= Math.sin((Number(op.slice(4)))).toFixed(3).toString();
-            if(isNaN(Number(displaytext))){
-              displaytext="Error"
-            }
-          }
-         return
-        }
-        if(cos.test(op)){
-          if(isdegree){
-            displaytext= Math.cos((Number(op.slice(4))*Math.PI)/180).toFixed(3).toString();
-            if(isNaN(Number(displaytext))){
-              displaytext="Error"
-            }
-          }else{
-            displaytext= Math.cos((Number(op.slice(4)))).toFixed(3).toString();
-            if(isNaN(Number(displaytext))){
-              displaytext="Error"
-            }
-          }
-         return
-        }
-        if(cosec.test(op)){
-          if(isdegree){
-            var ans= Math.sin((Number(op.slice(6))*Math.PI)/180).toFixed(3).toString();
-           
-          }else{
-            var ans= Math.sin((Number(op.slice(6)))).toFixed(3).toString();
-            
-          }
-           
-          displaytext=eval((1/Number(ans)).toString()).toString();
-          if(isNaN(Number(displaytext))){
-            displaytext="Error"
-         }
-         return
-        }
-        if(sec.test(op)){
-          if(isdegree){
-            var ans= Math.sin((Number(op.slice(4))*Math.PI)/180).toFixed(3).toString();
-           
-          }else{
-            var ans= Math.sin((Number(op.slice(4)))).toFixed(3).toString();
-            
-          }
-          displaytext=eval((1/Number(ans)).toString()).toString();
-          // console.log(displaytext);
-          if(isNaN(Number(displaytext))){
-            displaytext="Error"
-          }
-         return
-        }
-        if(cot.test(op)){
-          let ans:string;
-          if(isdegree){
-             ans= Math.sin((Number(op.slice(4))*Math.PI)/180).toFixed(3).toString();
-
-          }else{
-             ans= Math.sin((Number(op.slice(4)))).toFixed(3).toString();
-          }
-          displaytext=eval((1/Number(ans)).toString()).toString();
-          if(isNaN(Number(ans))){
-            displaytext="Error"
-          }
-         return
-        }
-
-        if(rt.test(op)){
-          let element =  op.split("√");
-          op = "Math.pow("+element[0]+","+"1/"+element[1]+")";
-        }
-        if(lg.test(op)){
-          let logvalue:number;
-          let element =  op.split("log");
-          logvalue= Math.log(Number(element[1]));
-
-          op = element[0]+"*"+logvalue;
-        }
-        
-
-        result = eval(op);
-        if(isNaN(result)){
-          displaytext="error";
-        }else{     displaytext = result;}
-   
-      } catch (e) {
+        (document.getElementById("#screen") as HTMLInputElement).value=finalResult.toString();
+      }catch (e){
         if (e instanceof SyntaxError) {
-          displaytext = "Not valid operation";
-          // displaytext="";
+        showErrorMessage("Not a valid operation")
         }
-      } finally {
+      }
+      break;
+      // Trigonometry
+     case "sin":
+        displaytext+="sin(";
         (document.getElementById("#screen") as HTMLInputElement).value = displaytext;
         return;
-      }
-   
-
-
+      case 'cos':
+        displaytext+="cos(";
+        (document.getElementById("#screen") as HTMLInputElement).value = displaytext;
+        return;
+      case 'tan':
+        displaytext+="tan(";
+        (document.getElementById("#screen") as HTMLInputElement).value = displaytext;
+        return;
+      case 'cosec':
+        displaytext+="cosec(";
+        (document.getElementById("#screen") as HTMLInputElement).value = displaytext;
+        return;
+      case 'sec':
+        displaytext+="sec(";
+        (document.getElementById("#screen") as HTMLInputElement).value = displaytext;
+        return;
+      case 'cot':
+        displaytext+="cot(";
+        (document.getElementById("#screen") as HTMLInputElement).value = displaytext;
+        return;
 
       // MEMORY FUNCTIONS
     case "ms":
-      memory=displaytext;
-      (document.getElementById("memory")as HTMLElement).innerText=memory;
-      displaytext=" ";
-      (document.getElementById("#screen") as HTMLInputElement).value = displaytext;
-
+      let expression:string=(document.getElementById("#screen") as HTMLInputElement).value;
+      console.log(expression);
+      memory=eval(expression);
+      (document.getElementById("memory") as HTMLElement).innerText=memory;
+      displaytext=memory;
+      (document.getElementById("#screen") as HTMLInputElement).value=displaytext;
       return
     case "mc":
-           memory="0";
-           (document.getElementById("memory") as HTMLElement).innerText=memory;
+           memory=" ";
+           (document.getElementById("memory") as HTMLElement).innerText=memory.toString();
            return
     case "mr":
           displaytext=(document.getElementById("memory") as HTMLElement).innerText;
-          (document.getElementById("#screen") as HTMLInputElement).value = displaytext;
-          return
-    case "mr":
-          displaytext=(document.getElementById("memory")as HTMLElement).innerText;
           (document.getElementById("#screen") as HTMLInputElement).value = displaytext;
           return
     case "m+":
             displaytext=displaytext+"+"+(document.getElementById("memory") as HTMLElement).innerText;
             var result=eval(displaytext);
             memory=result;
-            (document.getElementById("memory") as HTMLElement).innerText=memory;
+            (document.getElementById("memory") as HTMLElement).innerText=memory.toString();
             (document.getElementById("#screen") as HTMLInputElement).value=result;
             return
     case "m-":
-            displaytext=(document.getElementById("memory") as HTMLElement).innerText+"-"+displaytext;
+            displaytext=(document.getElementById("#screen") as HTMLInputElement).value;
+            memory=(document.getElementById("memory") as HTMLElement).innerText;  
+            displaytext=(memory)+"-"+"("+displaytext+")";
             var result=eval(displaytext);
-            memory=result;
-            (document.getElementById("memory") as HTMLElement).innerText=memory;
+            (document.getElementById("memory") as HTMLElement).innerText=result;
             (document.getElementById("#screen") as HTMLInputElement).value=result
             return
     // FUNTIONS HANDLER (FLOOR, RANDOM,CEIL,ABS)
@@ -516,7 +420,6 @@ function toggleplus(){
     let z= (document.getElementById("#screen") as HTMLInputElement).value;
     let r = eval(z);
     r=r.toString();
-    console.log(r);
     if(r.includes("-")){
       displaytext=Math.abs(r).toString();
     }
@@ -531,21 +434,7 @@ function toggleplus(){
 
   }
   (document.getElementById("#screen") as HTMLInputElement).value=displaytext;
-  return;
-//   let i:number=str.length;
-//   let updatedDisplay:string=""; 
-//   for(;i>=0;i--){
-//  if((str[i]>='0' && str[i]!<='9') ||str[i]=='.'){
-//   }else{
-//     break;
-//   }
-//   }
-//   updatedDisplay=str.slice(0,i-1)+"-"+str.slice(i-1,str.length)
-//   displaytext=updatedDisplay;
-//   (document.getElementById("#screen") as HTMLInputElement).value=displaytext;
-
-
-  
+  return;  
 }
 
 
@@ -562,7 +451,7 @@ function toggle() {
   let tenpowerx:HTMLElement = document.querySelector(".ten-power-x")!;
   let twopowerx:HTMLElement = document.querySelector(".two-power-x")!;
   let log:HTMLElement = document.querySelector(".log")!;
-  let xlogy:HTMLElement = document.querySelector(".xlogy")!;
+  let log2:HTMLElement = document.querySelector(".log2")!;
   let ln:HTMLElement = document.querySelector(".ln")!;
   let epowerx:HTMLElement = document.querySelector(".epowerx")!;
   if (square.classList.contains("hide")) {
@@ -595,10 +484,10 @@ function toggle() {
   }
   if (log.classList.contains("hide")) {
     log.classList.remove("hide");
-    xlogy.classList.add("hide");
+    log2.classList.add("hide");
   } else {
     log.classList.add("hide");
-    xlogy.classList.remove("hide");
+    log2.classList.remove("hide");
   }
   if (ln.classList.contains("hide")) {
     ln.classList.remove("hide");
@@ -614,23 +503,19 @@ function toggledeg() {
   if (isdegree) {
     degree.innerText = "RAD";
     isdegree = false;
-    console.log(isdegree);
   } else {
     degree.innerText = "DEG";
     isdegree = true;
-    console.log(isdegree);
   }
 }
 // DROP DOWN FOR TRIGONOMETRY MENU
 function trigooptionsadd(){
   let trigodrop:boolean=(document.querySelector(".trigo-dropdown") as HTMLElement).classList.contains("hide")
   if(trigodrop){
-    console.log(trigodrop);
     (document.querySelector(".trigo-dropdown") as HTMLElement).classList.remove("hide");
     (document.querySelector(".func-dropdown") as HTMLElement).classList.add("hide");
 
   }else{
-    console.log(trigodrop);
     (document.querySelector(".trigo-dropdown") as HTMLElement).classList.add("hide");   
   }
 }
@@ -660,35 +545,31 @@ function convertString(inputstring:string){
         callFunction: "getRoot($1, $2)" // Call the getRoot() function with the matched numbers as arguments
     },
     {
-        regPattern: /sin\((\d+[\/\.]?\d*)\)/g, // Regular expression to match a sine expression
-        callFunction: false ? "Math.sin($1)" : "Math.sin($1*(3.14/180))" // Call the getSin() function with the matched number as an argument
+        regPattern: /sin\((\d+[+\-\/\.]?\d*)\)/g, // Regular expression to match a sine expression
+        callFunction: isdegree ?"Math.sin(($1)*(3.14/180))": "Math.sin($1)"   // Call the getSin() function with the matched number as an argument
     },
     {
-        regPattern: /sin-1\((\d+[\/\.]?\d*)\)/g, // Regular expression to match an inverse sine expression
-        callFunction: "getSinIn($1)" // Call the getSinIn() function with the matched number as an argument
+        regPattern: /cosec\((\d+[+\-\/\.]?\d*)\)/g, // Regular expression to match an inverse sine expression
+        callFunction: isdegree ?"(1/Math.sin($1*(3.14/180))": "1/Math.sin($1))"  // Call the getSinIn() function with the matched number as an argument
     },
     {
-        regPattern: /cos\((\d+[\/\.]?\d*)\)/g, // Regular expression to match a cosine expression
-        callFunction: "Math.cos($1)" // Call the getCos() function with the matched number as an argument
+        regPattern: /cos\((\d+[+\-\/\.]?\d*)\)/g, // Regular expression to match a cosine expression
+        callFunction: isdegree ?"Math.cos($1*(3.14/180))": "Math.cos($1)"  // Call the getCos() function with the matched number as an argument
     },
     {
-        regPattern: /cos-1\((\d+[\/\.]?\d*)\)/g, // Regular expression to match an inverse cosine expression
-        callFunction: "getCosIn($1)" // Call the getCosIn() function with the matched number as an argument
+        regPattern: /sec\((\d+[+\-\/\.]?\d*)\)/g, // Regular expression to match an inverse cosine expression
+        callFunction: isdegree ?"(1/Math.cos($1*(3.14/180))": "1/Math.cos($1))" // Call the getCosIn() function with the matched number as an argument
     },
     {
-        regPattern: /tan\((\d+[\/\.]?\d*)\)/g, // Regular expression to match a tangent expression
-        callFunction: "Math.tan($1)" // Call the getTan() function with the matched number as an argument
+        regPattern: /tan\((\d+[+\-\/\.]?\d*)\)/g, // Regular expression to match a tangent expression
+        callFunction: isdegree ?"Math.tan($1*(3.14/180))": "Math.tan($1)" // Call the getTan() function with the matched number as an argument
     },
     {
-        regPattern: /tan-1\((\d+[\/\.]?\d*)\)/g, // Regular expression to match an inverse tangent expression
-        callFunction: "getTanIn($1)" // Call the getTanIn() function with the matched number as an argument
+        regPattern: /cot\((\d+[+\-\/\.]?\d*)\)/g, // Regular expression to match an inverse tangent expression
+        callFunction: isdegree ?"(1/Math.tan($1*(3.14/180)))": "(1/Math.tan($1))" // Call the getTanIn() function with the matched number as an argument
     },
-    // {
-    //     regPattern: /(\d+\.?\d*)\!/g, // Regular expression to match a factorial expression
-    //     callFunction: "factorial($1)" // Call the factorial() function with the matched number as an argument
-    // },
     {
-        regPattern: /log\((\d+\.?\d*)\)/g, // Regular expression to match a base-10 logarithm expression
+        regPattern: /log10\((\d+\.?\d*)\)/g, // Regular expression to match a base-10 logarithm expression
         callFunction: "Math.log10($1)" // Call the getLog() function with the matched number as an argument
     },
     {
@@ -696,7 +577,7 @@ function convertString(inputstring:string){
         callFunction: "Math.log2($1)" // Call the getLog2() function with the matched number as an argument
     },
     {
-        regPattern: /ln\((\d+\.?\d*)\)/g, // Regular expression to match a ln  expression
+        regPattern: /log\((\d+\.?\d*)\)/g, // Regular expression to match a ln  expression
         callFunction: "Math.log($1)"  // Call the getLn() function with the matched number as an argument
     },
 
@@ -711,4 +592,14 @@ regexAndFunction.map((regObject) => {
 return convertedString;
 
 }
+function showErrorMessage(message:string){
+  displaytext=" ";
+  (document.getElementById("#screen") as HTMLInputElement).value=displaytext;
+  (document.getElementById("errorscreen") as HTMLElement).innerText=message;
+
+  setTimeout(() => {
+    (document.getElementById("errorscreen") as HTMLElement).innerText=" ";
+  }, 1000);
+}
+
 // export{}

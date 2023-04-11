@@ -18,12 +18,13 @@
                     <input type="text" value=" " id="#screen" class="input-output" maxlength="20"></input>
             </div>
             <div class="container">
-                <div id="errorscreen"></div>
                 <div class="row deg-FE">
                         <div class="col deg"  onclick="toggledeg()"><div class="button degreebtn" id="#DEG">DEG</div></div>
                         <div class="col fe"  onclick="handleinput('fe')"><div class="button" id="#FE">F-E</div></div>  
+                        <div id="errorscreen"  class="col"></div>
+
                 </div> 
-                <div class="memory">Memory:<span id="memory">0</span></div>
+                <div class="memory">Memory:<span id="memory"></span></div>
                 <div class="row memory-function">
                    
                     <div class="col MC" onclick="handleinput('mc')"><div class="button">MC</div></div>
@@ -129,7 +130,7 @@
                     </div>
                     <div class="row">
                         <div class="col log button op" onclick="handleinput('log')"><div>log</div></div>
-                        <div class="col xlogy button op hide" onclick="handleinput('ylogx')"><div>Xlogy</div></div>
+                        <div class="col log2 button op hide" onclick="handleinput('log2')"><div>log<sub>2</sub>X</div></div>
                         <div class="col one button op" onclick="handleinput('1')"><div>1</div></div>  
                         <div class="col two button op" onclick="handleinput('2')"><div>2</div></div>
                         <div class="col three button op" onclick="handleinput('3')"><div>3</div></div> 

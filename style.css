@@ -144,5 +144,8 @@ body{
 .toggle{
     background-color: lightskyblue;
 }
-
+#errorscreen{
+    color: red;
+    font-weight: bold;
+}
 
