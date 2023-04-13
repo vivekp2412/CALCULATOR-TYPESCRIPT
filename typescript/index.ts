@@ -2,18 +2,18 @@ let displaytext:string= " ";
 let evalinputstring:string = " ";
 let isdegree:boolean = true;
 let memory:string="";
-let tan = /tan(\d+)/;
-let sin = /sin(\d+)/;
-let cos = /cos(\d+)/;
-let cot = /cot(\d+)/;
-let sec = /sec(\d+)/;
-let cosec = /cosec(\d+)/;
-let rt = /√(\d+)/;
-let lg=/log(\d+)/
+let tan:RegExp = /tan(\d+)/;
+let sin:RegExp  = /sin(\d+)/;
+let cos:RegExp  = /cos(\d+)/;
+let cot:RegExp  = /cot(\d+)/;
+let sec:RegExp  = /sec(\d+)/;
+let cosec:RegExp  = /cosec(\d+)/;
+let rt:RegExp  = /√(\d+)/;
+let lg:RegExp =/log(\d+)/
 
 //INDIVIDUAL FUNCTIONS FOR OPERATIONS
 function absolute(input:string):number {
-  let i = eval(input);
+  let i:number = eval(input);
  
   return Math.abs(i);
 }
@@ -51,13 +51,13 @@ function factorial(input:number):number {
 
 
 //MAIN CALCULATOR FUCTION
-function handleinput(input:string) {
-  var result;
+function handleinput(input:string):void {
+ let  result:string;
   let r:string;
   switch (input) {
     //BASIC OPERATIONS
     case "clear":
-      displaytext = " ";
+      displaytext= " ";
       (document.getElementById("#screen") as HTMLInputElement).value = " ";
       return;
     // Addition
@@ -179,7 +179,7 @@ function handleinput(input:string) {
     return;
     // PIE BUTTON HANDLER
     case "pie":
-        if (displaytext == " ") {
+        if (displaytext === " ") {
             displaytext+="3.14159";
             (document.getElementById("#screen") as HTMLInputElement).value= displaytext;
             return
@@ -345,7 +345,6 @@ function handleinput(input:string) {
       // MEMORY FUNCTIONS
     case "ms":
       let expression:string=(document.getElementById("#screen") as HTMLInputElement).value;
-      console.log(expression);
       memory=eval(expression);
       (document.getElementById("memory") as HTMLElement).innerText=memory;
       displaytext=memory;
@@ -361,7 +360,7 @@ function handleinput(input:string) {
           return
     case "m+":
             displaytext=displaytext+"+"+(document.getElementById("memory") as HTMLElement).innerText;
-            var result=eval(displaytext);
+            result=eval(displaytext);
             memory=result;
             (document.getElementById("memory") as HTMLElement).innerText=memory.toString();
             (document.getElementById("#screen") as HTMLInputElement).value=result;
@@ -370,7 +369,7 @@ function handleinput(input:string) {
             displaytext=(document.getElementById("#screen") as HTMLInputElement).value;
             memory=(document.getElementById("memory") as HTMLElement).innerText;  
             displaytext=(memory)+"-"+"("+displaytext+")";
-            var result=eval(displaytext);
+            result=eval(displaytext);
             (document.getElementById("memory") as HTMLElement).innerText=result;
             (document.getElementById("#screen") as HTMLInputElement).value=result
             return
@@ -407,7 +406,7 @@ function handleinput(input:string) {
   }
 }
 //FUNCTION FOR HANDLER PLUS/MINUS TOGGLER
-function toggleplus(){
+function toggleplus():void{
   let isplus:boolean;
   let str =  (document.getElementById("#screen") as HTMLInputElement).value;
   if(str.includes("-")){
@@ -601,5 +600,3 @@ function showErrorMessage(message:string){
     (document.getElementById("errorscreen") as HTMLElement).innerText=" ";
   }, 1000);
 }
-
-// export{}
