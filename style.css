@@ -1,0 +1,151 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+body{
+    margin: 0 !important;
+}
+.container-main{
+
+
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    outline: 2px solid black;
+}
+
+.calculator{
+    background-color:#f1f1f1;
+    max-height: 1000px;
+    width: 100%;
+    max-width:25rem;
+    /* border: 2px solid black;   */
+    box-shadow: 0px 0px 30px -51px black;
+}
+.display{
+   margin: 10% 0;
+}
+.hide{
+    display: none !important;
+}
+.input-output{
+    text-align:right;
+    font-size: 2em;
+    font-weight: bold;
+    max-width: 100%;
+    border: none;
+    outline: none;
+    padding: 10px;
+    background-color: #f1f1f1;
+}
+.deg,.fe{
+    max-width: 60px !important;
+    margin: 5px 0px;
+}
+.deg-FE .col{
+    padding: 0;
+}
+.button{
+    background-color: #f4f4f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 100%;
+    height: 40px;
+    cursor: pointer;
+    border: 5%;
+    font-size: 18px;
+    padding: 9px 0px;
+    margin: 5px;
+
+
+    /* outline: 2px solid black; */
+}
+.button:hover{
+    background-color: #c6c7c8;
+
+}
+.memory-function{
+    min-height: 100%;
+}
+.memory-function .col{
+    padding: 0;
+    
+}
+.trigo{
+    margin: 0px 5px;
+}
+.trigonometry{
+    position: relative;
+}
+.trigo-function{
+    max-width: 84%;
+
+}
+.trigo-function .col{
+    padding: 0;
+}
+.trigo-dropdown{
+    position: absolute;
+    z-index: 99999;
+    background-color: white;
+    width: 15rem;
+}
+
+/* .trigonometry:hover .trigo-dropdown-content{
+    display: block;
+} */
+.trigo-dropdown-content{
+    max-width: 17rem;
+    width: 100%;
+    /* display: none; */
+}
+.dropdownrow{
+    padding: 0;
+    margin: 0;
+}
+.func-dropdown{
+    position: absolute;
+    z-index: 99999;
+    width: 13rem;
+    background-color: white;
+}
+.functions:hover .func-dropdown-content{
+    display: block;
+}
+.func-dropdown-content{
+    max-width: 17rem;
+    width: 100%;
+}
+.symbol{
+    margin: 0 6px;
+}
+.operators-operands .col:hover{
+ background-color: #c6c7c8;
+}
+.op{
+    margin: 3px;
+    min-width: 17%;
+} 
+.equal{
+    background-color: lightskyblue;
+}
+.degreebtn{
+    background-color:lightskyblue;
+}
+.toggle{
+    background-color: lightskyblue;
+}
+#errorscreen{
+    color: red;
+    font-weight: bold;
+}
+

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/bb80167760.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./style.css">
+    
+</head>
+<body>
+    <section  class="container-main">
+        <div class="calculator">
+            <div class="display">
+                    <input type="text" value=" " id="#screen" class="input-output" maxlength="20"></input>
+            </div>
+            <div class="container">
+                <div class="row deg-FE">
+                        <div class="col deg"  onclick="toggledeg()"><div class="button degreebtn" id="#DEG">DEG</div></div>
+                        <div class="col fe"  onclick="handleinput('fe')"><div class="button" id="#FE">F-E</div></div>  
+                        <div id="errorscreen"  class="col"></div>
+
+                </div> 
+                <div class="memory">Memory:<span id="memory"></span></div>
+                <div class="row memory-function">
+                   
+                    <div class="col MC" onclick="handleinput('mc')"><div class="button">MC</div></div>
+                    <div class="col MR" onclick="handleinput('mr')"><div class="button">MR</div></div>  
+                    <div class="col M+" onclick="handleinput('m+')"><div class="button">M+</div></div>
+                    <div class="col M-" onclick="handleinput('m-')" ><div class="button">M-</div></div> 
+                    <div class="col MS" onclick="handleinput('ms')"><div class="button">MS</div></div> 
+                </div>
+                <div class="row trigo-function">
+                    <div class="col trigonometry">
+                        <div class="button trigobutton" onclick="trigooptionsadd()">
+                             <img class="symbol trigo"src="./Assets/icons8-trigonometry-18.png" alt="">
+                             <span class="trigo"> Trigonometry </span> <?xml version="1.0" encoding="iso-8859-1"?>
+                             <!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+                             <svg fill="#000000" height="15px" width="15px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+                                  viewBox="0 0 330 330" xml:space="preserve">
+                             <path id="XMLID_225_" d="M325.607,79.393c-5.857-5.857-15.355-5.858-21.213,0.001l-139.39,139.393L25.607,79.393
+                                 c-5.857-5.857-15.355-5.858-21.213,0.001c-5.858,5.858-5.858,15.355,0,21.213l150.004,150c2.813,2.813,6.628,4.393,10.606,4.393
+                                 s7.794-1.581,10.606-4.394l149.996-150C331.465,94.749,331.465,85.251,325.607,79.393z"/>
+                             </svg>
+                        </div>
+                        <div class="trigo-dropdown hide" id="trigodorp">
+                            <div class="trigo-dropdown-content">
+                                <div class="row dropdownrow">
+                                    <div class="col sin button op" onclick="handleinput('sin')" ><div>Sin</div></div>
+                                    <div class="col cos button op" onclick="handleinput('cos')"><div>Cos</div></div>  
+                                    <div class="col tan button op" onclick="handleinput('tan')"><div>Tan</div></div>
+                                </div>
+                                <div class="row dropdownrow">
+                                    <div class="col sininv button op " onclick="handleinput('cosec')"><div>cosec</div></div>
+                                    <div class="col cosinv button op" onclick="handleinput('sec')"><div>sec</div></div>  
+                                    <div class="col taninv button op" onclick="handleinput('cot')"><div>cot</div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col functions">
+                        <div class="button functionbutton" onclick="functionoptionsadd()">
+                            <img class="symbol function" src="./Assets/icons8-formula-fx-17.png" alt="">
+                            Function <svg fill="#000000" height="15px" width="15px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+                            viewBox="0 0 330 330" xml:space="preserve">
+                       <path id="XMLID_225_" d="M325.607,79.393c-5.857-5.857-15.355-5.858-21.213,0.001l-139.39,139.393L25.607,79.393
+                           c-5.857-5.857-15.355-5.858-21.213,0.001c-5.858,5.858-5.858,15.355,0,21.213l150.004,150c2.813,2.813,6.628,4.393,10.606,4.393
+                           s7.794-1.581,10.606-4.394l149.996-150C331.465,94.749,331.465,85.251,325.607,79.393z"/>
+                       </svg>
+                        </div>
+                        <div class="func-dropdown hide">
+                            <div class="func-dropdown-content">
+                                <div class="row dropdownrow">
+                                    <div class="col abs button op" onclick="handleinput('abs')"><div>|x|</div></div>
+                                    <div class="col floorx button op"onclick="handleinput('floor')"><div>⌊x⌋</div></div>  
+                                    
+                                </div>
+                                <div class="row dropdownrow">
+                                    
+                                    <div class="col ceilx button op" onclick="handleinput('ceil')"><div>⌈x⌉</div></div>
+                                    <div class="col Random button op"onclick="handleinput('rand')"><div>rand</div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>   
+                </div>
+                <div class="operators-operands">
+                    <div class="row">
+                        <div class="col toggle button op" onclick="toggle()"><div>2nd</div></div>
+                        <div class="col pie button op" onclick="handleinput('pie')"><div>π</div></div>  
+                        <div class="col exponential button op" onclick="handleinput('e')"><div>e</div></div>
+                        <div class="col clear button op" onclick="handleinput('clear')"><div>C</div></div> 
+                        <div class="col deletelast button op" onclick="handleinput('x')"><div><i class="fa-solid fa-delete-left"></i></div></div> 
+                    </div>
+                    <div class="row">
+                        <div class="col square button op" onclick="handleinput('square')"><div>x<sup>2</sup></div></div>
+                        <div class="col cube button op hide " onclick="handleinput('cube')"><div>x<sup>3</sup></div></div>
+                        <div class="col 1/X button op" onclick="handleinput('1/x')"><div>1/x</div></div>  
+                        <div class="col absolute button op" onclick="handleinput('abs')"><div>|x|</div></div>
+                        <div class="col exp button op" onclick="handleinput('exp')"><div>exp</div></div> 
+                        <div class="col mod button op" onclick="handleinput('%')"><div>mod</div></div> 
+                    </div>
+                    <div class="row">
+                        <div class="col root button op" onclick="handleinput('sqrt')"><div>√</div></div>
+                        <div class="col cuberoot button op hide" onclick="handleinput('cbrt')"><div>3√</div></div>
+                        <div class="col l-round-brac button op" onclick="handleinput('lp')"><div>(</div></div>  
+                        <div class="col r-round-brac button op" onclick="handleinput('rp')"><div>)</div></div>
+                        <div class="col factorial button op" onclick="handleinput('!')"><div>n!</div></div> 
+                        <div class="col divide button op" onclick="handleinput('/')"><div><i class="fa-solid fa-divide"></i></div></div> 
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col x-power-y button op" onclick="handleinput('x-power-y')"><div>X<sup>y</sup></div></div>
+                        <div class="col yrootx button op hide" onclick="handleinput('y-root-x')"><div>Y√X</div></div>
+                        <div class="col seven button op" onclick="handleinput('7')"><div>7</div></div>  
+                        <div class="col eight button op" onclick="handleinput('8')"><div>8</div></div>
+                        <div class="col nine button op" onclick="handleinput('9')"><div>9</div></div> 
+                        <div class="col multiply button op" onclick="handleinput('*')"><div><i class="fa-solid fa-xmark"></i></div></div> 
+                    </div>
+                    <div class="row">
+                        <div class="col ten-power-x button op" onclick="handleinput('ten-power-x')"><div>10<sup>x</sup></div></div>
+                        <div class="col two-power-x button op hide" onclick="handleinput('two-power-x')"><div>2<sup>x</sup></div></div>
+                        <div class="col four button op" onclick="handleinput('4')"><div>4</div></div>  
+                        <div class="col five button op" onclick="handleinput('5')"><div>5</div></div>
+                        <div class="col six button op" onclick="handleinput('6')"><div>6</div></div> 
+                        <div class="col subtract button op" onclick="handleinput('-')"><div><i class="fa-solid fa-minus"></i></div></div> 
+                    </div>
+                    <div class="row">
+                        <div class="col log button op" onclick="handleinput('log')"><div>log</div></div>
+                        <div class="col log2 button op hide" onclick="handleinput('log2')"><div>log<sub>2</sub>X</div></div>
+                        <div class="col one button op" onclick="handleinput('1')"><div>1</div></div>  
+                        <div class="col two button op" onclick="handleinput('2')"><div>2</div></div>
+                        <div class="col three button op" onclick="handleinput('3')"><div>3</div></div> 
+                        <div class="col deletelast button op" onclick="handleinput('+')"><div><i class="fa-solid fa-plus"></i></div></div> 
+                    </div>
+                    <div class="row">
+                        <div class="col button ln op" onclick="handleinput('ln')"><div>ln</div></div>
+                        <div class="col epowerx button op hide" onclick="handleinput('epowerx')"><div>e<sup>x</sup></div></div>
+                        <div class="col plus-minus button op" onclick="toggleplus()"><div>+/-</div></div>  
+                        <div class="col zero button op" onclick="handleinput('0')"><div>0</div></div>
+                        <div class="col dot button op" onclick="handleinput('.')"><div>.</div></div> 
+                        <div class="col button op equal" onclick="handleinput('=')"><div><i class="fa-solid fa-equals"></i></div></div> 
+                    </div>
+                </div>
+              </div>
+            
+            
+        
+        </div>
+    </section>
+    <script src="./javascript/index.js"></script>
+</body>
+</html>
